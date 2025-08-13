@@ -1,0 +1,140 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-07-15 00:00:00.000000",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "creation_date",
+  "created_by",
+  "total_invoices",
+  "status",
+  "column_break_6",
+  "batch_id",
+  "remarks",
+  "section_break_9",
+  "invoice_details"
+ ],
+ "fields": [
+  {
+   "default": "BIL-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "BIL-.####",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "creation_date",
+   "fieldtype": "Datetime",
+   "label": "Creation Date",
+   "reqd": 1
+  },
+  {
+   "default": "user",
+   "fieldname": "created_by",
+   "fieldtype": "Link",
+   "label": "Created By",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_invoices",
+   "fieldtype": "Int",
+   "label": "Total Invoices Created",
+   "reqd": 1
+  },
+  {
+   "default": "Completed",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "In Progress\nCompleted\nFailed\nPartially Completed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "batch_id",
+   "fieldtype": "Data",
+   "label": "Batch ID",
+   "unique": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break",
+   "label": "Invoice Details"
+  },
+  {
+   "fieldname": "invoice_details",
+   "fieldtype": "Table",
+   "label": "Invoice Details",
+   "options": "Bulk Invoice Creation Detail",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2025-07-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Alphaspp",
+ "name": "Bulk Invoice Creation Log",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 0
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

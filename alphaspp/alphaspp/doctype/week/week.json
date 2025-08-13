@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-12 12:36:32.051171",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "week_id",
+  "start_date",
+  "end_date",
+  "no_days"
+ ],
+ "fields": [
+  {
+   "fieldname": "week_id",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Week Id",
+   "options": "Week 1\nWeek 2\nWeek 3\nWeek 4"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "End Date"
+  },
+  {
+   "fieldname": "no_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "No Days"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-01-12 13:32:28.469274",
+ "modified_by": "Administrator",
+ "module": "Alphaspp",
+ "name": "Week",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

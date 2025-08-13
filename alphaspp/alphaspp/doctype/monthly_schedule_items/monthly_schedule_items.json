@@ -1,0 +1,160 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-10 12:06:08.812976",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "schedule_date",
+  "buyer_name",
+  "customer",
+  "part_no",
+  "spp_ref",
+  "type",
+  "total_quantity",
+  "factory",
+  "column_break_qmtdh",
+  "week_1_w1",
+  "week_2_w2",
+  "week_3_w3",
+  "week_4_w4",
+  "revised_comment",
+  "last_updated",
+  "section_break_ckve3",
+  "default_po",
+  "default_po_date",
+  "column_break_re7wz",
+  "po",
+  "po_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "schedule_date",
+   "fieldtype": "Date",
+   "label": "Schedule Date"
+  },
+  {
+   "fieldname": "buyer_name",
+   "fieldtype": "Data",
+   "label": "Buyer Name"
+  },
+  {
+   "fieldname": "part_no",
+   "fieldtype": "Link",
+   "label": "Part No",
+   "options": "Item"
+  },
+  {
+   "fieldname": "spp_ref",
+   "fieldtype": "Data",
+   "label": "SPP Ref"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "NEW/ADDL\nREVISED"
+  },
+  {
+   "fieldname": "total_quantity",
+   "fieldtype": "Float",
+   "label": "Total Quantity"
+  },
+  {
+   "fieldname": "week_1_w1",
+   "fieldtype": "Float",
+   "label": "Week 1 (W1)"
+  },
+  {
+   "fieldname": "week_2_w2",
+   "fieldtype": "Float",
+   "label": "Week 2 (W2)"
+  },
+  {
+   "fieldname": "week_3_w3",
+   "fieldtype": "Float",
+   "label": "Week 3 (W3)"
+  },
+  {
+   "fieldname": "week_4_w4",
+   "fieldtype": "Float",
+   "label": "Week 4 (W4)"
+  },
+  {
+   "fieldname": "default_po",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Default PO"
+  },
+  {
+   "fieldname": "default_po_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Default PO Date"
+  },
+  {
+   "fieldname": "po",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "PO"
+  },
+  {
+   "fieldname": "po_date",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "PO Date"
+  },
+  {
+   "fieldname": "column_break_qmtdh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ckve3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_re7wz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "revised_comment",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Revised Comment"
+  },
+  {
+   "fieldname": "last_updated",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Last Updated"
+  },
+  {
+   "fieldname": "factory",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Factory",
+   "options": "Factory 1\nFactory 2"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-01-20 09:44:14.974187",
+ "modified_by": "Administrator",
+ "module": "Alphaspp",
+ "name": "Monthly Schedule Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SCHEDULE-{YYYY}/{month}",
+ "creation": "2025-01-07 14:07:06.066398",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "month",
+  "status",
+  "column_break_c4fft",
+  "week_table",
+  "section_break_lzeah",
+  "schedule_item",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "month",
+   "fieldtype": "Select",
+   "label": "Month"
+  },
+  {
+   "fieldname": "schedule_item",
+   "fieldtype": "Table",
+   "label": "Schedule Item",
+   "options": "Monthly Schedule Items"
+  },
+  {
+   "fieldname": "column_break_c4fft",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "week_table",
+   "fieldtype": "Table",
+   "label": "Week Table",
+   "options": "Week"
+  },
+  {
+   "fieldname": "section_break_lzeah",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Monthly Schedule",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "default": "Current",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Current\nCompleted",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-21 09:43:47.020884",
+ "modified_by": "Administrator",
+ "module": "Alphaspp",
+ "name": "Monthly Schedule",
+ "name_case": "UPPER CASE",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

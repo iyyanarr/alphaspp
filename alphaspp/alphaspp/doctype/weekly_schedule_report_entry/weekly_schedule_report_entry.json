@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:W-SCHEDULE-{schedule}-{week}",
+ "creation": "2025-01-10 20:03:17.550184",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "schedule",
+  "week",
+  "column_break_csmtt",
+  "week_start_date",
+  "week_end_date",
+  "section_break_qxcb5",
+  "week_schedule_items",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "schedule",
+   "fieldtype": "Link",
+   "label": "Schedule",
+   "options": "Monthly Schedule"
+  },
+  {
+   "fieldname": "week",
+   "fieldtype": "Select",
+   "label": "Week"
+  },
+  {
+   "fieldname": "column_break_csmtt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "week_start_date",
+   "fieldtype": "Date",
+   "label": "Week Start Date"
+  },
+  {
+   "fieldname": "week_end_date",
+   "fieldtype": "Date",
+   "label": "Week End Date"
+  },
+  {
+   "fieldname": "section_break_qxcb5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "week_schedule_items",
+   "fieldtype": "Table",
+   "label": "Week Schedule Items",
+   "options": "Weekly Schedule Item"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Weekly Schedule Report Entry",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Monthly Schedule",
+   "link_fieldname": "name"
+  }
+ ],
+ "modified": "2025-01-13 10:45:14.284848",
+ "modified_by": "Administrator",
+ "module": "Alphaspp",
+ "name": "Weekly Schedule Report Entry",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

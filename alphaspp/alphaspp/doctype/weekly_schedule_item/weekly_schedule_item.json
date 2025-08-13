@@ -1,0 +1,104 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-10 20:13:01.400766",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "part_no",
+  "spp_ref",
+  "target",
+  "achvd",
+  "defct",
+  "excess",
+  "cl_stk",
+  "w_stk_deficit",
+  "reason_code",
+  "root_cause",
+  "action_plan",
+  "enter_reason"
+ ],
+ "fields": [
+  {
+   "fieldname": "part_no",
+   "fieldtype": "Link",
+   "label": "PART NO",
+   "options": "Item"
+  },
+  {
+   "fieldname": "spp_ref",
+   "fieldtype": "Data",
+   "label": "SPP REF"
+  },
+  {
+   "fieldname": "target",
+   "fieldtype": "Float",
+   "label": "TARGET",
+   "read_only": 1
+  },
+  {
+   "fieldname": "achvd",
+   "fieldtype": "Float",
+   "label": "ACHVD",
+   "read_only": 1
+  },
+  {
+   "fieldname": "defct",
+   "fieldtype": "Float",
+   "label": "DEFCT",
+   "read_only": 1
+  },
+  {
+   "fieldname": "excess",
+   "fieldtype": "Float",
+   "label": "EXCESS"
+  },
+  {
+   "fieldname": "cl_stk",
+   "fieldtype": "Float",
+   "label": "CL STK"
+  },
+  {
+   "fieldname": "w_stk_deficit",
+   "fieldtype": "Float",
+   "label": "W STK DEFICIT"
+  },
+  {
+   "fieldname": "reason_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "REASON CODE",
+   "options": "MCS Reason Code"
+  },
+  {
+   "fieldname": "root_cause",
+   "fieldtype": "Small Text",
+   "label": "ROOT CAUSE"
+  },
+  {
+   "fieldname": "action_plan",
+   "fieldtype": "Small Text",
+   "label": "ACTION PLAN"
+  },
+  {
+   "depends_on": "eval:doc.defct < 0;",
+   "fieldname": "enter_reason",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Enter Reason"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-01-22 14:18:49.552558",
+ "modified_by": "Administrator",
+ "module": "Alphaspp",
+ "name": "Weekly Schedule Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
