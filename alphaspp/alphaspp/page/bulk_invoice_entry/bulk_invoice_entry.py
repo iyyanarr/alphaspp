@@ -103,6 +103,7 @@ def create_bulk_invoice_batch(entries):
         invoice_series = entry.get('invoice_series')
         po_no = entry.get('po_no')
         po_date = entry.get('po_date')
+        c_customer_ref_code = entry.get('customer_ref_code')
 
         if not (billing_from and product and billed_qty and customer and date and invoice_series):
             frappe.throw(_('Some mandatory fields are missing in the entry.'))
@@ -110,17 +111,30 @@ def create_bulk_invoice_batch(entries):
         # Use the selected invoice series from the frontend
         naming_series = invoice_series
 
-        # Get item rate from sales order
-        item_rate = frappe.db.get_value(
-            'Sales Order Item',
-            {
-                'parent': sales_order,
-                'item_code': product
-            },
-            'rate'
-        )
+        # Get item rate from sales order based on custom_customer_ref_code
+        item_rate = None
+        if c_customer_ref_code and sales_order:
+            item_rate = frappe.db.get_value(
+                'Sales Order Item',
+                {
+                    'parent': sales_order,
+                    'custom_customer_ref_code': c_customer_ref_code
+                },
+                'rate'
+            )
         
-        # If rate not found, get from Item master
+        # If rate not found with customer ref code, fallback to item_code match
+        if not item_rate and sales_order:
+            item_rate = frappe.db.get_value(
+                'Sales Order Item',
+                {
+                    'parent': sales_order,
+                    'item_code': product
+                },
+                'rate'
+            )
+        
+        # If still not found, get from Item master
         if not item_rate:
             item_rate = frappe.db.get_value('Item', product, 'standard_rate') or 0
 
@@ -175,6 +189,7 @@ def create_bulk_invoice_batch(entries):
                 'driver_name': driver_name,  # Driver name field for Sales Invoice
                 'items': [{
                     'item_code': product,
+                    'custom_customer_ref_code': c_customer_ref_code,
                     'qty': billed_qty,
                     'rate': item_rate,
                     'sales_order': sales_order,

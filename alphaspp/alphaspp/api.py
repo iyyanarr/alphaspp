@@ -413,3 +413,28 @@ def get_customer_ref_for_items(item_codes, customer):
     except Exception as e:
         frappe.log_error(f"Error in get_customer_ref_for_items: {str(e)}")
         return {}
+
+@frappe.whitelist()
+def get_customer_ref_codes_for_item(item_code, customer):
+    """Get customer reference codes specifically for a selected item and customer"""
+    try:
+        if not item_code or not customer:
+            return []
+        
+        # Query Item Customer Detail child table for the specific item and customer
+        ref_codes = frappe.db.sql("""
+            SELECT DISTINCT ref_code
+            FROM `tabItem Customer Detail`
+            WHERE parent = %s
+            AND customer_name = %s
+            AND ref_code IS NOT NULL
+            AND ref_code != ''
+            ORDER BY ref_code
+        """, (item_code, customer), as_dict=True)
+        
+        # Return just the ref_code values as a list
+        return [item.ref_code for item in ref_codes]
+        
+    except Exception as e:
+        frappe.log_error(f"Error in get_customer_ref_codes_for_item: {str(e)}")
+        return []
