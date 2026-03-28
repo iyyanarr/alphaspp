@@ -1,3 +1,5 @@
+from . import __version__ as app_version
+
 app_name = "alphaspp"
 app_title = "Alphaspp"
 app_publisher = "Alphaworkz"
