@@ -1,6 +1,5 @@
 [project]
 name = "alphaspp"
-version = ">=1.0.0 <2.0.0"
 authors = [
     { name = "Alphaworkz", email = "support@aplhaworkz.com"}
 ]
