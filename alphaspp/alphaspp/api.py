@@ -7,7 +7,10 @@ from frappe.utils import cstr
 def get_customer_info(sales_order):
     so = frappe.get_doc('Sales Order', sales_order)
     customer = frappe.get_doc('Customer', so.customer)
-    return { customer    }  # Ensure address field is appropriately fetched.
+    return [{
+        'name': customer.name,
+        'primary_address': customer.primary_address or _("No address available")
+    }]
 
 
 @frappe.whitelist()

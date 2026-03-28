@@ -306,23 +306,3 @@ def create_bulk_invoice_batch(entries):
         'failed': len(failed_invoices),
         'total': len(entries)
     }
-@frappe.whitelist()
-def fetch_sales_orders_and_products():
-    print('getting*****************')
-    sales_orders = frappe.get_all('Sales Order', filters={'status': ['in', ['To Bill', 'To Bill and Deliver']]}, fields=['name'])
-    product_sales_orders = {}
-
-    for so in sales_orders:
-        items = frappe.get_all('Sales Order Item', filters={'parent': so.name}, fields=['item_code', 'item_name'])
-        for item in items:
-            if item.item_code not in product_sales_orders:
-                product_sales_orders[item.item_code] = []
-            product_sales_orders[item.item_code].append(so.name)
-
-    return product_sales_orders
-
-@frappe.whitelist()
-def get_customer_info(sales_order):
-    so = frappe.get_doc('Sales Order', sales_order)
-    customer = frappe.get_doc('Customer', so.customer)
-    return {'name': customer.customer_name, 'address': customer.address_display or 'No address available'}  # Ensure address field is appropriately fetched.

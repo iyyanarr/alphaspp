@@ -21,13 +21,11 @@ alphaspp.bulk_invoice_entry.BulkInvoiceEntry = class BulkInvoiceEntry {
         this.sales_orders = {};
         this.company_addresses = [];
         this.warehouses = [];
-        this.ref_code_mapping = {}; // Maps customer ref codes to item codes
         this.setup();
         this.make();
         this.init_table();
         this.fetch_initial_data(); // Fetch the initial data for sales orders and products
         this.fetch_warehouses(); // Fetch warehouses for 'Shipping From' field
-        this.fetch_ref_code_mapping(); // Fetch customer ref code mappings
         this.load_drivers(); // Load drivers from Driver doctype
     }
 
@@ -51,9 +49,9 @@ alphaspp.bulk_invoice_entry.BulkInvoiceEntry = class BulkInvoiceEntry {
                         <!-- Customer Ref Code & Product Selection -->
                         <div class="row">
                             <div class="col-md-4 form-group">
-                                <label>Customer Ref Code</label>
+                                <label>Ref Code / Product</label>
                                 <input type="text" class="form-control" 
-                                    id="customer-ref-code" placeholder="Enter ref code" 
+                                    id="customer-ref-code" placeholder="Enter code" 
                                     autocomplete="off">
                                 <div id="ref-code-suggestions" class="dropdown-menu" style="display: none; position: absolute; z-index: 1000; width: 100%;"></div>
                             </div>
@@ -291,17 +289,6 @@ alphaspp.bulk_invoice_entry.BulkInvoiceEntry = class BulkInvoiceEntry {
         });
     }
 
-    fetch_ref_code_mapping() {
-        frappe.call({
-            method: 'alphaspp.alphaspp.api.get_customer_ref_code_mapping',
-            callback: (r) => {
-                if (r.message) {
-                    this.ref_code_mapping = r.message;
-                    // Refresh product dropdown to include ref code products
-                    this.populate_product();
-                }
-            }
-        });
     }
 
     load_drivers() {
@@ -383,16 +370,8 @@ alphaspp.bulk_invoice_entry.BulkInvoiceEntry = class BulkInvoiceEntry {
         $productSelect.empty().append('<option value="">Select Product</option>');
 
         // Get products from sales orders
-        const products = Object.keys(this.sales_orders || {});
-        console.log('Products from sales orders:', products);
-        
-        // Also add products that have ref codes (from ref_code_mapping)
-        const ref_code_products = Object.values(this.ref_code_mapping || {});
-        console.log('Products from ref code mapping:', ref_code_products);
-        
-        // Combine and deduplicate
-        const allProducts = [...new Set([...products, ...ref_code_products])];
-        console.log('All products (combined):', allProducts);
+        const allProducts = Object.keys(this.sales_orders || {});
+        console.log('Active products from sales orders:', allProducts);
         
         allProducts.forEach(product => {
             $productSelect.append(`<option value="${product}">${product}</option>`);
@@ -515,15 +494,15 @@ alphaspp.bulk_invoice_entry.BulkInvoiceEntry = class BulkInvoiceEntry {
             return;
         }
 
-        // Filter ref codes that match the input
-        const matches = Object.keys(this.ref_code_mapping).filter(ref_code => 
-            ref_code.toLowerCase().includes(input)
+        // Filter product codes that match the input (from active sales orders)
+        const matches = Object.keys(this.sales_orders || {}).filter(item_code => 
+            item_code.toLowerCase().includes(input)
         ).slice(0, 10); // Limit to 10 suggestions
 
         if (matches.length > 0) {
-            const suggestionHtml = matches.map(ref_code => 
-                `<a class="dropdown-item ref-code-option" href="#" data-ref-code="${ref_code}" data-item-code="${this.ref_code_mapping[ref_code]}">
-                    <strong>${ref_code}</strong> → ${this.ref_code_mapping[ref_code]}
+            const suggestionHtml = matches.map(item_code => 
+                `<a class="dropdown-item ref-code-option" href="#" data-item-code="${item_code}">
+                    <strong>${item_code}</strong>
                 </a>`
             ).join('');
             
@@ -532,18 +511,17 @@ alphaspp.bulk_invoice_entry.BulkInvoiceEntry = class BulkInvoiceEntry {
             // Bind click events for suggestions
             $suggestions.find('.ref-code-option').on('mousedown', (e) => {
                 e.preventDefault();
-                const refCode = $(e.target).closest('.ref-code-option').data('ref-code');
                 const itemCode = $(e.target).closest('.ref-code-option').data('item-code');
-                this.select_ref_code(refCode, itemCode);
+                this.select_ref_code(itemCode);
             });
         } else {
             $suggestions.hide();
         }
     }
 
-    select_ref_code(refCode, itemCode) {
-        // Set the ref code in the input
-        this.$content.find('#customer-ref-code').val(refCode);
+    select_ref_code(itemCode) {
+        // Set the code in the input
+        this.$content.find('#customer-ref-code').val(itemCode);
         
         // Set the product in the dropdown
         const $productSelect = this.$content.find('#product');
@@ -557,7 +535,7 @@ alphaspp.bulk_invoice_entry.BulkInvoiceEntry = class BulkInvoiceEntry {
         
         // Show success message
         frappe.show_alert({
-            message: `Selected: ${refCode} → ${itemCode}`,
+            message: `Selected: ${itemCode}`,
             indicator: 'green'
         });
     }
@@ -580,9 +558,8 @@ alphaspp.bulk_invoice_entry.BulkInvoiceEntry = class BulkInvoiceEntry {
             e.preventDefault();
             const $active = $options.filter('.active');
             if ($active.length) {
-                const refCode = $active.data('ref-code');
-                const itemCode = $active.data('item-code');
-                this.select_ref_code(refCode, itemCode);
+                const itemCode = $active.data('itemCode'); // Fixed data attribute access
+                this.select_ref_code(itemCode);
             }
         } else if (e.key === 'Escape') {
             $suggestions.hide();
